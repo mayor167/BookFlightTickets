@@ -33,18 +33,18 @@ class _BottomBarState extends State<BottomBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          "My tickets",
-          style: TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-          ),
-        ),
-        centerTitle: true,
-        backgroundColor: Color(0xFF27548A),
-      ),
+      // appBar: AppBar(
+      //   title: const Text(
+      //     "My tickets",
+      //     style: TextStyle(
+      //       fontSize: 24,
+      //       fontWeight: FontWeight.bold,
+      //       color: Colors.white,
+      //     ),
+      //   ),
+      //   centerTitle: true,
+      //   backgroundColor: Color(0xFF27548A),
+      // ),
       body: Center(child: _widgetOptions[_selectedIndex],),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,

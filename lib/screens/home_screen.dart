@@ -1,3 +1,4 @@
+import 'package:booktickets/utilis/app_styles.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -6,9 +7,44 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Text("Welcome to Home screen"),
-      ),
-    );
+      backgroundColor: Styles.bgColor,
+      body: ListView(
+        children: [
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            child:Column(
+              children: [
+                Row(  
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children:[
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Good morning',style: Styles.headLineStyle3,),
+                        Text('Book Tickets',style: Styles.headLineStyle1,),
+                      ],
+                    ),
+                    Container(
+                      height: 50,
+                      width: 50,
+                      decoration: BoxDecoration(
+                     borderRadius: BorderRadius.circular(10),
+                      image: DecorationImage(
+                         fit: BoxFit.fitHeight,
+                      image: AssetImage(
+                              'assets/images/logo.png'
+                          )
+                          )
+                      ),
+                    ),
+                  ],
+                )
+              ],
+            ),
+          )
+
+        ],
+      )
+      );
   }
 }
