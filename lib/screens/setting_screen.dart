@@ -26,6 +26,7 @@ class SettingScreen extends StatelessWidget {
           children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              // mainAxisAlignment: MainAxisAlignment.end,
         children: [
           Container(
             margin: EdgeInsets.only(left: 20, right: 20),

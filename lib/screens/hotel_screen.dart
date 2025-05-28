@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
 class HotelScreen extends StatelessWidget {
-  const HotelScreen({super.key});
+  final Map<String, dynamic>hotel;
+  const HotelScreen({super.key, required this.hotel});
 
   @override
   Widget build(BuildContext context) {
+    print("Hotel price is ${hotel['price']}");
     final size = AppLayout.getSize(context);
     return   Container(
       margin:EdgeInsets.only(right: 17, top: 5) ,
@@ -24,27 +26,27 @@ class HotelScreen extends StatelessWidget {
         ]
       ),
       width: size.width*0.6,
-      height: 350,
+      height: AppLayout.getHeight(350),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            height: 180,
+            height: AppLayout.getHeight(180),
             decoration:  BoxDecoration(
               borderRadius: BorderRadius.circular(12),
               color: Styles.primaryColor,
-              image: const DecorationImage(
+              image:  DecorationImage(
                 fit: BoxFit.cover,
-                image: AssetImage("assets/images/one.png"),
+                image: AssetImage("assets/images/${hotel['image']}"),
                 )
             ),
           ),
           const Gap(10),
-          Text("Open space",style: Styles.headLineStyle2.copyWith(color: Styles.kakiColor),),
+          Text(hotel['place'],style: Styles.headLineStyle2.copyWith(color: Styles.kakiColor),),
             const Gap(5),
-            Text("London",style: Styles.headLineStyle3.copyWith(color: Colors.white),),
+            Text(hotel['destination'],style: Styles.headLineStyle3.copyWith(color: Colors.white),),
             const Gap(8),
-            Text("\$40/night",style: Styles.headLineStyle1 .copyWith(color:Styles.kakiColor),)
+            Text("\$${hotel['price']}/night",style: Styles.headLineStyle1 .copyWith(color:Styles.kakiColor),)
         ],
       ),
     );
