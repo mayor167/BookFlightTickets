@@ -6,7 +6,8 @@ import 'package:gap/gap.dart';
 
 class TicketView extends StatelessWidget {
    final Map<String, dynamic> ticket;
-  const TicketView({super.key, required this.ticket});
+   final bool? isColor;
+  const TicketView({super.key, required this.ticket, this.isColor});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,7 @@ class TicketView extends StatelessWidget {
               */
             Container(
               decoration: BoxDecoration(
-                color: const Color(0xFF526799),
+                color: isColor==null? Color(0xFF526799):Colors.white,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(AppLayout.getHeight(21)),
                   topRight: Radius.circular(AppLayout.getHeight(21)),
@@ -39,14 +40,14 @@ class TicketView extends StatelessWidget {
                     children: [
                       Text(
                         ticket['from']['code'],
-                        style: Styles.headLineStyle3.copyWith(
+                        style:isColor==null? Styles.headLineStyle3.copyWith(
                           color: Colors.white,
-                        ),  
+                        ):Styles.headLineStyle3,  
                       ),
 
                       //  const Spacer(),
                       Expanded(child: Container()),
-                      ThickContainer(),
+                      ThickContainer(isColor: true,),
                       //  Text("..."),
                       // const Spacer(),
                       Expanded(
@@ -74,8 +75,8 @@ class TicketView extends StatelessWidget {
                                         width: AppLayout.getWidth(3),
                                         height: AppLayout.getHeight(1),
                                         child: DecoratedBox(
-                                          decoration: BoxDecoration(
-                                            color: Colors.white,
+                                         decoration: BoxDecoration(
+                                            color:isColor==null? Colors.white:Colors.grey.shade300,
                                           ),
                                         ),
                                       ),
@@ -89,21 +90,21 @@ class TicketView extends StatelessWidget {
                                 angle: 1.5,
                                 child: Icon(
                                   Icons.local_airport_rounded,
-                                  color: Colors.white,
+                                  color:isColor==null? Colors.white:Color(0xFF8ACCF7),
                                 ),
                               ),
                             ),
                           ],
                         ),
                       ),
-                      ThickContainer(),
+                      ThickContainer(isColor: true,),
                       // const Spacer(),
                       Expanded(child: Container()),
                       Text(
                         ticket['to']['code'],
-                        style: Styles.headLineStyle3.copyWith(
-                          color: Colors.white,
-                        ),
+                        style: isColor==null? Styles.headLineStyle3.copyWith(
+                          color:Colors.white,
+                        ):Styles.headLineStyle3,
                       ),
                     ],
                   ),
@@ -114,23 +115,23 @@ class TicketView extends StatelessWidget {
                       SizedBox(
                         child: Text(
                           ticket['from']['name'],
-                          style: Styles.headLineStyle4.copyWith(
+                          style: isColor== null? Styles.headLineStyle4.copyWith(
                             color: Colors.white,
-                          ),
+                          ):Styles.headLineStyle4,
                         ),
                       ),
                       Text(
                         ticket['flying time'],
-                        style: Styles.headLineStyle4.copyWith(
+                        style: isColor== null? Styles.headLineStyle4.copyWith(
                           color: Colors.white,
-                        ),
+                        ):Styles.headLineStyle4,
                       ),
                       SizedBox(
                         child: Text(
                           ticket['to']['name'],
-                          style: Styles.headLineStyle4.copyWith(
+                          style: isColor==null? Styles.headLineStyle4.copyWith(
                             color: Colors.white,
-                          ),
+                          ):Styles.headLineStyle4,
                         ),
                       ),
                     ],
@@ -142,7 +143,7 @@ class TicketView extends StatelessWidget {
             showing the orange part of the card/ticket
             */
             Container(
-              color: Styles.orangeColor,
+              color: isColor==null ? Styles.orangeColor:Colors.white,
               child: Row(
                 children: [
                   SizedBox(
@@ -150,7 +151,7 @@ class TicketView extends StatelessWidget {
                     width: AppLayout.getWidth(10),
                     child: DecoratedBox(
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color:isColor==null ? Colors.grey.shade200:Colors.white,
                         borderRadius: BorderRadius.only(
                           topRight: Radius.circular(10),
                           bottomRight: Radius.circular(10),
@@ -160,7 +161,7 @@ class TicketView extends StatelessWidget {
                   ),
                   Expanded(
                     child: Padding(
-                      padding:  EdgeInsets.all(AppLayout.getHeight(10)),
+                      padding:  EdgeInsets.all(AppLayout.getHeight(12)),
                       child: LayoutBuilder(
                         builder: (
                           BuildContext context,
@@ -176,7 +177,7 @@ class TicketView extends StatelessWidget {
                                 width: AppLayout.getHeight(5),
                                 height: AppLayout.getHeight(1),
                                 child: DecoratedBox(
-                                  decoration: BoxDecoration(color: Colors.white),
+                                  decoration: BoxDecoration(color: isColor==null? Colors.white:Colors.grey.shade300),
                                 ),
                               ),
                             ),
@@ -185,12 +186,12 @@ class TicketView extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(
+                     SizedBox(
                     height: 20,
                     width: 10,
                     child: DecoratedBox(
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color:isColor==null ? Colors.grey.shade200:Colors.white,
                         borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(16),
                           bottomLeft: Radius.circular(16),
@@ -204,7 +205,7 @@ class TicketView extends StatelessWidget {
              Container(
                 padding: EdgeInsets.only(left: AppLayout.getHeight(16),top:AppLayout.getHeight(10),right: AppLayout.getHeight(16),bottom: AppLayout.getHeight(10)),
               decoration: BoxDecoration(
-                color: Styles.orangeColor,
+                color: isColor == null ?Styles.orangeColor:Colors.white,
                 borderRadius: const BorderRadius.only(
                   bottomLeft: Radius.circular(21),
                   bottomRight: Radius.circular(21),
@@ -219,25 +220,25 @@ class TicketView extends StatelessWidget {
                           Column(
                              crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(ticket['date'], style: Styles.headLineStyle3.copyWith(color: Colors.white),),
+                              Text(ticket['date'], style: isColor == null? Styles.headLineStyle3.copyWith(color: Colors.white):Styles.headLineStyle3,),
                               const Gap(2),
-                               Text("Date", style: Styles.headLineStyle4.copyWith(color: Colors.white),)
+                               Text("Date", style:isColor == null? Styles.headLineStyle4.copyWith(color: Colors.white):Styles.headLineStyle4,)
                             ],
                           ),
                            Column(
                              crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Text(ticket['departure_time'], style: Styles.headLineStyle3.copyWith(color: Colors.white),),
+                              Text(ticket['departure_time'], style:isColor == null? Styles.headLineStyle3.copyWith(color: Colors.white):Styles.headLineStyle3,),
                               const Gap(2),
-                               Text("Departure time", style: Styles.headLineStyle4.copyWith(color: Colors.white),)
+                               Text("Departure time", style: isColor == null? Styles.headLineStyle4.copyWith(color: Colors.white):Styles.headLineStyle4,)
                             ],
                           ),
                            Column(
                              crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
-                              Text(ticket['Number'].toString(), style: Styles.headLineStyle3.copyWith(color: Colors.white),),
+                              Text(ticket['Number'].toString(), style: isColor == null? Styles.headLineStyle3.copyWith(color: Colors.white):Styles.headLineStyle3,),
                               const Gap(2),
-                               Text("Number", style: Styles.headLineStyle4.copyWith(color: Colors.white),)
+                               Text("Number", style: isColor == null? Styles.headLineStyle4.copyWith(color: Colors.white):Styles.headLineStyle4,)
                             ],
                           )
                         ],
