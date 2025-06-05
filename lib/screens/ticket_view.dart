@@ -1,8 +1,11 @@
 import 'package:booktickets/utilis/app_layout.dart';
 import 'package:booktickets/utilis/app_styles.dart';
+import 'package:booktickets/widgets/column_layout.dart';
+import 'package:booktickets/widgets/layout_builder_widget.dart';
 import 'package:booktickets/widgets/thick_container.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
 
 class TicketView extends StatelessWidget {
    final Map<String, dynamic> ticket;
@@ -14,7 +17,7 @@ class TicketView extends StatelessWidget {
     final size = AppLayout.getSize(context);
     return SizedBox(
       width: size.width*0.85,
-      height: AppLayout.getHeight(200),
+      height: AppLayout.getHeight(GetPlatform.isAndroid==true?172:172),
       child: Container(
         margin: EdgeInsets.only(right: AppLayout.getHeight(16)),
         // color: Colors.red,
@@ -55,35 +58,7 @@ class TicketView extends StatelessWidget {
                           children: [
                             SizedBox(
                               height: AppLayout.getHeight(24),
-                              child: LayoutBuilder(
-                                builder: (
-                                  BuildContext context,
-                                  BoxConstraints constraints,
-                                ) {
-                                  print(
-                                    "The width is ${constraints.constrainWidth()}",
-                                  );
-                                  return Flex(
-                                    direction: Axis.horizontal,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: List.generate(
-                                      (constraints.constrainWidth() / 6)
-                                          .floor(),
-                                      (index) => SizedBox(
-                                        width: AppLayout.getWidth(3),
-                                        height: AppLayout.getHeight(1),
-                                        child: DecoratedBox(
-                                         decoration: BoxDecoration(
-                                            color:isColor==null? Colors.white:Colors.grey.shade300,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  );
-                                },
-                              ),
+                              child:const AppLayoutBuilderWidget(sections:6),
                             ),
                             Center(
                               child: Transform.rotate(
@@ -202,13 +177,16 @@ class TicketView extends StatelessWidget {
                 ],
               ),
             ),
+            /*Bottom part of the orange card/ticket */
+            
+            
              Container(
                 padding: EdgeInsets.only(left: AppLayout.getHeight(16),top:AppLayout.getHeight(10),right: AppLayout.getHeight(16),bottom: AppLayout.getHeight(10)),
               decoration: BoxDecoration(
                 color: isColor == null ?Styles.orangeColor:Colors.white,
-                borderRadius: const BorderRadius.only(
-                  bottomLeft: Radius.circular(21),
-                  bottomRight: Radius.circular(21),
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(isColor ==null?21:0),
+                  bottomRight: Radius.circular(isColor==null?21:0),
                 ),
               ),
               child: Column(
@@ -217,30 +195,11 @@ class TicketView extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                        
                         children: [
-                          Column(
-                             crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(ticket['date'], style: isColor == null? Styles.headLineStyle3.copyWith(color: Colors.white):Styles.headLineStyle3,),
-                              const Gap(2),
-                               Text("Date", style:isColor == null? Styles.headLineStyle4.copyWith(color: Colors.white):Styles.headLineStyle4,)
-                            ],
-                          ),
-                           Column(
-                             crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(ticket['departure_time'], style:isColor == null? Styles.headLineStyle3.copyWith(color: Colors.white):Styles.headLineStyle3,),
-                              const Gap(2),
-                               Text("Departure time", style: isColor == null? Styles.headLineStyle4.copyWith(color: Colors.white):Styles.headLineStyle4,)
-                            ],
-                          ),
-                           Column(
-                             crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Text(ticket['Number'].toString(), style: isColor == null? Styles.headLineStyle3.copyWith(color: Colors.white):Styles.headLineStyle3,),
-                              const Gap(2),
-                               Text("Number", style: isColor == null? Styles.headLineStyle4.copyWith(color: Colors.white):Styles.headLineStyle4,)
-                            ],
-                          )
+                          AppColumnLayout(firstText: ticket['date'], secondText: "Date", alignment: CrossAxisAlignment.start, isColor:isColor ,),
+
+                           AppColumnLayout(firstText: ticket['departure_time'], secondText: "Departure time", alignment: CrossAxisAlignment.center, isColor:isColor ,),
+
+                            AppColumnLayout(firstText: ticket['Number'].toString(), secondText: "Number", alignment: CrossAxisAlignment.end, isColor:isColor ,),
                         ],
                        ) 
                    ],   
